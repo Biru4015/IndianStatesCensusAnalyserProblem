@@ -2,28 +2,35 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-
-namespace CensusAnalyser
+namespace IndianStatesCensusAnalyser
 {
-    /// <summary>
-    /// Thhis class contains the code for load the CSV data 
-    /// </summary>
-    class CsvStates
+    class CsvStateCensus
     {
+        //GETS THE NUMBER OF RECORDS
         /// <summary>
-        /// This method is created for finding number of records
+        /// GETS THE NUMBER OF RECORDS
         /// </summary>
-        /// <param name="filepath"></param>
-        /// <returns></returns>
         public static int getnumberOfRecords(string filepath)
         {
             int count = 0;
             string[] elements = File.ReadAllLines(filepath);
             IEnumerable<string> e = elements;
             foreach (var element in e)
-            {
-                count++;
-            }
+                try
+                {
+                    count++;
+                    count = 0;
+                    string[] data= File.ReadAllLines(filepath);
+                    foreach (var item in data)
+                    {
+                        count++;
+                    }
+                    return count - 1;
+                }
+                catch (CustomException)
+                {
+                    throw new CustomException("File not found");
+                }
             return count - 1;
         }
     }

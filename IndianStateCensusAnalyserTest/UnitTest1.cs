@@ -15,8 +15,19 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void givenNumOfState_whaeCheckingnumberOfRecords_shouldReturnsNumOfRecords()
         {
-            int numberofRecords = StateCensusAnalyser.numberOfRecords(filepath);
+            int numberofRecords = (int)StateCensusAnalyser.numberOfRecords(filepath);
             Assert.AreEqual(29, numberofRecords);
+        }
+
+        /// <summary>
+        /// Test case 1.2
+        /// For checking when incorrect file name enterd raised exception
+        /// </summary>
+        [Test]
+        public void fileNameIncorect_whenCheckingFilePath_shouldReturnsFileNotFoundeException()
+        {
+            string actualPath = @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusData.csr";
+            Assert.AreEqual("File not found",(string)StateCensusAnalyser.numberOfRecords(actualPath));
         }
     }
 }

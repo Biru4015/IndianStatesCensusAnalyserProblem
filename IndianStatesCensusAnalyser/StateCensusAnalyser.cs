@@ -9,7 +9,20 @@ namespace IndianStatesCensusAnalyser
     /// </summary>
     public class StateCensusAnalyser
     {
-        private object filepath;
+        public string filepath;
+        public char delimiter = ',';
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public StateCensusAnalyser(string filepath)
+        {
+            this.filepath = filepath;
+        }
+        public StateCensusAnalyser(string filepath, char delimiter)
+        {
+            this.filepath = filepath;
+            this.delimiter = delimiter;
+        }
 
         /// <summary>
         /// This is main method
@@ -25,23 +38,27 @@ namespace IndianStatesCensusAnalyser
             return a.Length-1;
         }
 
-        /// <summary>
-        ///Method to find Number of records in file
-        /// </summary>
-        public static object numberOfRecords(string filepath)
+        public object numberOfRecords()
         {
             try
             {
                 if (Path.GetExtension(filepath) != ".csv")
                 {
-                    throw new CustomException("File_format_Incorrect", CustomException.Exception_type.File_format_Incorrect);
+                    throw new CustomException("File format Incorrect", CustomException.Exception.File_format_Incorrect);
                 }
-                if (filepath != @"C:\Users\boss\source\repos\CensusAnalyzerProblem\CensusData\StateCensus.csv")
+                if (filepath != @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusData.csv")
                 {
-                    throw new CustomException("File_not_found", CustomException.Exception_type.File_not_found);
+                    throw new CustomException("File not found", CustomException.Exception.File_not_found);
                 }
                 string[] data = File.ReadAllLines(filepath);
-                return data.Length-1;
+                foreach (var element in data)
+                {
+                    if (!element.Contains(delimiter))
+                    {
+                        throw new CustomException("Delimiter Incorrect", CustomException.Exception.Delimiter_Incorrect);
+                    }
+                }
+                return data.Length;
             }
             catch (CustomException e)
             {

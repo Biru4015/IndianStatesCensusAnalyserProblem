@@ -29,7 +29,7 @@ namespace IndianStatesCensusAnalyser
                 }
                 catch (CustomException)
                 {
-                    throw new CustomException("File_not_found");
+                    throw new CustomException("File not found");
                 }
             return count - 1;
         }

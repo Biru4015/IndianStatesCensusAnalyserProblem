@@ -27,7 +27,8 @@ namespace IndianStateCensusAnalyserTest
         public void givenFileNameIncorect_whenCheckingFilePath_shouldReturnsFileNotFoundeException()
         {
             string actualPath = @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusDatas.csv";
-            Assert.AreEqual("File_not_found",(string)StateCensusAnalyser.numberOfRecords(actualPath));
+            StateCensusAnalyser stateCensus = new StateCensusAnalyser(actualPath);
+            Assert.AreEqual("File not found", stateCensus.numberOfRecords());
         }
 
         /// <summary>
@@ -37,8 +38,21 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void givenIncorrectFileFormat_whenCheckingFileFormat_shouldReturnsCustomException()
         {
-            string actualpath = @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusData.txt";
-            Assert.AreEqual("File_format_Incorrect",StateCensusAnalyser.numberOfRecords(actualpath));
+            string actualPath = @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusData.txt";
+            StateCensusAnalyser stateCensus = new StateCensusAnalyser(actualPath);
+            Assert.AreEqual("File format Incorrect", stateCensus.numberOfRecords());
+        }
+
+        /// <summary>
+        ///Test case 1.4
+        ///csv file Correct but delimiter Incorrect
+        /// </summary>
+        [Test]
+        public void stateCensus_DelimiterincorrectException()
+        {
+            string actualPath = @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusData.csv";
+            StateCensusAnalyser stateCensus = new StateCensusAnalyser(actualPath);
+            Assert.AreEqual("Delimiter Incorrect", stateCensus.numberOfRecords());
         }
     }
 }

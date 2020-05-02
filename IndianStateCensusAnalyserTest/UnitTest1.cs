@@ -48,11 +48,23 @@ namespace IndianStateCensusAnalyserTest
         ///csv file Correct but delimiter Incorrect
         /// </summary>
         [Test]
-        public void stateCensus_DelimiterincorrectException()
+        public void whenDelimeterNotPresent_whenCkeckingInFile_shouldReturnsCustomException()
         {
             string actualPath = @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusData.csv";
             StateCensusAnalyser stateCensus = new StateCensusAnalyser(actualPath);
             Assert.AreEqual("Delimiter Incorrect", stateCensus.numberOfRecords());
+        }
+
+        /// <summary>
+        ///Test case 1.5
+        ///csv file Correct but header name is incorrect in file
+        /// </summary>
+        [Test]
+        public void whenHeaderIncorrect_whenAnalyse_shouldReturnCustomException()
+        {
+            string actualPath = @"C:\Users\Birendra Kumar\source\repos\CensusData\HeaderWrong\StateCensusData.csv";
+            StateCensusAnalyser stateCensus = new StateCensusAnalyser(actualPath);
+            Assert.AreEqual("Header Incorrect", stateCensus.headerIncorrect());
         }
     }
 }

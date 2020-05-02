@@ -15,7 +15,7 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void givenNumOfState_whaeCheckingnumberOfRecords_shouldReturnsNumOfRecords()
         {
-            int numberofRecords = (int)StateCensusAnalyser.numberOfRecords(filepath);
+            int numberofRecords = (int)StateCensusAnalyser.records(filepath);
             Assert.AreEqual(29, numberofRecords);
         }
 
@@ -24,10 +24,21 @@ namespace IndianStateCensusAnalyserTest
         /// For checking when incorrect file name enterd raised exception
         /// </summary>
         [Test]
-        public void fileNameIncorect_whenCheckingFilePath_shouldReturnsFileNotFoundeException()
+        public void givenFileNameIncorect_whenCheckingFilePath_shouldReturnsFileNotFoundeException()
         {
-            string actualPath = @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusData.csr";
-            Assert.AreEqual("File not found",(string)StateCensusAnalyser.numberOfRecords(actualPath));
+            string actualPath = @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusDatas.csv";
+            Assert.AreEqual("File_not_found",(string)StateCensusAnalyser.numberOfRecords(actualPath));
+        }
+
+        /// <summary>
+        ///Test case 1.3
+        ///When csv file is correct but type is incorrect
+        /// </summary>
+        [Test]
+        public void givenIncorrectFileFormat_whenCheckingFileFormat_shouldReturnsCustomException()
+        {
+            string actualpath = @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusData.txt";
+            Assert.AreEqual("File_format_Incorrect",StateCensusAnalyser.numberOfRecords(actualpath));
         }
     }
 }

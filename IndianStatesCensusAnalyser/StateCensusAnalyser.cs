@@ -38,7 +38,7 @@ namespace IndianStatesCensusAnalyser
             return a.Length-1;
         }
 
-        public object numberOfRecords()
+        public Object numberOfRecords()
         {
             try
             {
@@ -50,7 +50,9 @@ namespace IndianStatesCensusAnalyser
                 {
                     throw new CustomException("File not found", CustomException.Exception.File_not_found);
                 }
+
                 string[] data = File.ReadAllLines(filepath);
+
                 foreach (var element in data)
                 {
                     if (!element.Contains(delimiter))
@@ -58,9 +60,26 @@ namespace IndianStatesCensusAnalyser
                         throw new CustomException("Delimiter Incorrect", CustomException.Exception.Delimiter_Incorrect);
                     }
                 }
-                return data.Length;
+                return data.Length-1;
             }
             catch (CustomException e)
+            {
+                return e.Message;
+            }
+        }
+
+        public Object headerIncorrect()
+        {
+            try
+            {
+                string[] data = File.ReadAllLines(filepath);
+                if (data[0] != "State,Population,AreaInSqKm,DensityPerSqKm")
+                {
+                    throw new CustomException("Header Incorrect", CustomException.Exception.Header_Incorrect);
+                }
+                return data.Length - 1;
+            }
+            catch(CustomException e)
             {
                 return e.Message;
             }

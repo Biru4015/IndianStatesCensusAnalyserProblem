@@ -14,7 +14,8 @@ namespace IndianStatesCensusAnalyser
         {
             File_not_found,
             File_format_Incorrect,
-            Delimiter_Incorrect
+            Delimiter_Incorrect,
+            Header_Incorrect
         }
         public string message;
         public CustomException(string message, Exception type)

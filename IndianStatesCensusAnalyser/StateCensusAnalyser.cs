@@ -1,26 +1,27 @@
-﻿using System;
-using System.IO;
-using IndianStatesCensusAnalyser;
-
-namespace IndianStatesCensusAnalyser
+﻿namespace IndianStatesCensusAnalyser
 {
+    using System;
+    using System.IO;
+    using IndianStatesCensusAnalyser;
+
     /// <summary>
     /// This class contains the main method main of Indian states census analyser problem
     /// </summary>
     public class StateCensusAnalyser
     {
-        public string filepath;
+        public string filePath;
         public char delimiter = ',';
+
         /// <summary>
         /// Constructor
         /// </summary>
-        public StateCensusAnalyser(string filepath)
+        public StateCensusAnalyser(string filePath)
         {
-            this.filepath = filepath;
+            this.filePath = filePath;
         }
         public StateCensusAnalyser(string filepath, char delimiter)
         {
-            this.filepath = filepath;
+            this.filePath = filepath;
             this.delimiter = delimiter;
         }
 
@@ -32,26 +33,26 @@ namespace IndianStatesCensusAnalyser
         {
             Console.WriteLine("Welcome to India state census Analyzer");
         }
-        public static object records(string filepath)
+        public static object Records(string filepath)
         {
             string[] a = File.ReadAllLines(filepath);
             return a.Length-1;
         }
 
-        public Object numberOfRecords()
+        public Object NumberOfRecords()
         {
             try
             {
-                if (Path.GetExtension(filepath) != ".csv")
+                if (Path.GetExtension(filePath) != ".csv")
                 {
                     throw new CustomException("File format Incorrect", CustomException.Exception.File_format_Incorrect);
                 }
-                if (filepath != @"C:\Users\Birendra Kumar\source\repos\CensusData\StateCensusData.csv")
+                if (filePath != @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv")
                 {
                     throw new CustomException("File not found", CustomException.Exception.File_not_found);
                 }
 
-                string[] data = File.ReadAllLines(filepath);
+                string[] data = File.ReadAllLines(filePath);
 
                 foreach (var element in data)
                 {
@@ -68,11 +69,15 @@ namespace IndianStatesCensusAnalyser
             }
         }
 
-        public Object headerIncorrect()
+        /// <summary>
+        ///This method is for 
+        /// </summary>
+        /// <returns></returns>
+        public Object HeaderIncorrect()
         {
             try
             {
-                string[] data = File.ReadAllLines(filepath);
+                string[] data = File.ReadAllLines(filePath);
                 if (data[0] != "State,Population,AreaInSqKm,DensityPerSqKm")
                 {
                     throw new CustomException("Header Incorrect", CustomException.Exception.Header_Incorrect);

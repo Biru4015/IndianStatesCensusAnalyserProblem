@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using IndianStatesCensusAnalyser;
 namespace IndianStatesCensusAnalyser
 {
-    class CsvStateCensus
+    public class CsvStateCensus
     {
         //GETS THE NUMBER OF RECORDS
         /// <summary>

@@ -108,5 +108,17 @@ namespace IndianStateCensusAnalyserTest
             CsvStateCensus csvState = new CsvStateCensus(actualPath);
             Assert.AreEqual("File format Incorrect",csvState.GettingNumberOfRecords());
         }
+
+        /// <summary>
+        ///Test case 1.4
+        /// comma separated file Correct but delimiter Incorrect
+        /// </summary>
+        [Test]
+        public void GivenIncorrectDelimiter_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
+        {
+            string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+            CsvStateCensus csvState = new CsvStateCensus(actualPath);
+            Assert.AreEqual("Delimiter Incorrect", csvState.GettingNumberOfRecords());
+        }
     }
 }

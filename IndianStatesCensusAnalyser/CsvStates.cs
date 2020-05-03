@@ -58,5 +58,26 @@ namespace IndianStatesCensusAnalyser
                 return e.Message;
             }
         }
+
+        /// <summary>
+        ///This method is for 
+        /// </summary>
+        /// <returns></returns>
+        public Object HeaderIncorrect()
+        {
+            try
+            {
+                string[] data = File.ReadAllLines(filePath);
+                if (data[0] != "SrNo,State,Name,TIN,StateCode")
+                {
+                    throw new CustomException("Header Incorrect", CustomException.Exception.Header_Incorrect);
+                }
+                return data.Length - 1;
+            }
+            catch (CustomException e)
+            {
+                return e.Message;
+            }
+        }
     }
 }

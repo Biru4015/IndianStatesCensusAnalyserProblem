@@ -120,5 +120,16 @@ namespace IndianStateCensusAnalyserTest
             CsvStateCensus csvState = new CsvStateCensus(actualPath);
             Assert.AreEqual("Delimiter Incorrect", csvState.GettingNumberOfRecords());
         }
+
+        /// <summary>
+        ///TC-1.5:csv file Correct but header Incorrect
+        /// </summary>
+        [Test]
+        public void GivenIncorrectHeader_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
+        {
+            string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode_HeaderChecking.csv";
+            CsvStateCensus csvState = new CsvStateCensus(actualPath);
+            Assert.AreEqual("Header Incorrect", csvState.HeaderIncorrect());
+        }
     }
 }

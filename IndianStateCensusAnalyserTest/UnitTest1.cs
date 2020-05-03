@@ -12,6 +12,7 @@ namespace IndianStateCensusAnalyserTest
         /// Reading the file path
         /// </summary>
         private string filePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
+        private string stateCode = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
 
         /// <summary>
         /// Test case 1.1
@@ -70,6 +71,17 @@ namespace IndianStateCensusAnalyserTest
             string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData_Header.csv";
             StateCensusAnalyser stateCensus = new StateCensusAnalyser(actualPath);
             Assert.AreEqual("Header Incorrect", stateCensus.HeaderIncorrect());
+        }
+
+        /// <summary>
+        /// Test case 2.1 
+        /// Test for checking number of Records in statecode csv
+        /// </summary>
+        [Test]
+        public void GivenCSVStateCodeFile_WhenAnalyse_ReturnNumberOfRecordsMatch()
+        {
+            int actual = CsvStateCensus.getnumberOfRecords(stateCode);
+            Assert.AreEqual(37,actual);
         }
     }
 }

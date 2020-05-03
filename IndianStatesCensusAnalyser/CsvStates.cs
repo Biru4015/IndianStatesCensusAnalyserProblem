@@ -7,32 +7,29 @@ namespace IndianStatesCensusAnalyser
 {
     public class CsvStateCensus
     {
-        //GETS THE NUMBER OF RECORDS
+        /// <summary>
+        /// Initialize the object
+        /// </summary>
+        private object filepath;
+
         /// <summary>
         /// GETS THE NUMBER OF RECORDS
         /// </summary>
-        public static int getnumberOfRecords(string filepath)
+        public static Object GetNumberOfRecords(string filepath)
         {
-            int count = 0;
-            string[] elements = File.ReadAllLines(filepath);
-            IEnumerable<string> e = elements;
-            foreach (var element in e)
-                try
+            try
+            {
+                if (filepath != @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv")
                 {
-                    count++;
-                    count = 0;
-                    string[] data= File.ReadAllLines(filepath);
-                    foreach (var item in data)
-                    {
-                        count++;
-                    }
-                    return count - 1;
+                    throw new CustomException("File not found",CustomException.Exception.File_not_found);
                 }
-                catch (CustomException)
-                {
-                    throw new CustomException("Delimiter Incorrect");
-                }
-            return count - 1;
+                string[] data = File.ReadAllLines(filepath);
+                return data.Length - 1;
+            }
+            catch (CustomException e)
+            {
+                return e.message;
+            }
         }
     }
 }

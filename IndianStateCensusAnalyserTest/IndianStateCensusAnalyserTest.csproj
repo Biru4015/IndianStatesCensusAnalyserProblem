@@ -16,4 +16,11 @@
     <ProjectReference Include="..\IndianStatesCensusAnalyser\IndianStatesCensusAnalyser.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="UnitTest1.cs">
+      <ExcludeFromSourceAnalysis>True</ExcludeFromSourceAnalysis>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -81,15 +81,32 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenCSVStateCodeFile_WhenAnalyse_ReturnNumberOfRecordsMatch()
         {
-            int actual =(int)CsvStateCensus.GetNumberOfRecords(stateCode);
+            int actual =(int)CsvStateCensus.GettingRecords(stateCode);
             Assert.AreEqual(37,actual);
         }
 
+        /// <summary>
+        /// Test case 2.2
+        /// If file incorrect then throw custom exception for statecode csv
+        /// </summary>
         [Test]
         public void GivenIncorrectfile_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
         {
             string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.csv";
-            Assert.AreEqual("File not found", (string)CsvStateCensus.GetNumberOfRecords(actualPath));
+            CsvStateCensus csvState = new CsvStateCensus(actualPath);
+            Assert.AreEqual("File not found", (string)csvState.GettingNumberOfRecords());
+        }
+
+        /// <summary>
+        /// Test case 2.3
+        /// If file type is incorrect throw custom exception for statecode csv
+        /// </summary>
+        [Test]
+        public void GivenIncorrectfileType_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
+        {
+            string actualPath= @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.txt";
+            CsvStateCensus csvState = new CsvStateCensus(actualPath);
+            Assert.AreEqual("File format Incorrect",csvState.GettingNumberOfRecords());
         }
     }
 }

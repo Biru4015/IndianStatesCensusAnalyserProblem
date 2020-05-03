@@ -7,28 +7,47 @@ namespace IndianStatesCensusAnalyser
 {
     public class CsvStateCensus
     {
-        /// <summary>
-        /// Initialize the object
-        /// </summary>
-        private object filepath;
+        public string filePath;
+        public char delimiter = ',';
 
         /// <summary>
-        /// GETS THE NUMBER OF RECORDS
+        /// Constructor
         /// </summary>
-        public static Object GetNumberOfRecords(string filepath)
+        public CsvStateCensus(string filePath)
+        {
+            this.filePath = filePath;
+        }
+        public CsvStateCensus(string filepath, char delimiter)
+        {
+            this.filePath = filepath;
+            this.delimiter = delimiter;
+        }
+
+        public static object GettingRecords(string filepath)
+        {
+            string[] a = File.ReadAllLines(filepath);
+            return a.Length - 1;
+        }
+
+        public Object GettingNumberOfRecords()
         {
             try
             {
-                if (filepath != @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv")
+                if (Path.GetExtension(filePath) != ".csv")
                 {
-                    throw new CustomException("File not found",CustomException.Exception.File_not_found);
+                    throw new CustomException("File format Incorrect", CustomException.Exception.File_format_Incorrect);
                 }
-                string[] data = File.ReadAllLines(filepath);
+                if (filePath != @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv")
+                {
+                    throw new CustomException("File not found", CustomException.Exception.File_not_found);
+                }
+
+                string[] data = File.ReadAllLines(filePath);
                 return data.Length - 1;
             }
             catch (CustomException e)
             {
-                return e.message;
+                return e.Message;
             }
         }
     }

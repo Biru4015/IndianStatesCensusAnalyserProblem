@@ -43,6 +43,14 @@ namespace IndianStatesCensusAnalyser
                 }
 
                 string[] data = File.ReadAllLines(filePath);
+
+                foreach (var element in data)
+                {
+                    if (!element.Contains(delimiter))
+                    {
+                        throw new CustomException("Delimiter Incorrect", CustomException.Exception.Delimiter_Incorrect);
+                    }
+                }
                 return data.Length - 1;
             }
             catch (CustomException e)

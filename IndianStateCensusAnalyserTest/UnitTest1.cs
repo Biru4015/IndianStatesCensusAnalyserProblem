@@ -2,6 +2,7 @@ namespace IndianStateCensusAnalyserTest
 {
     using IndianStatesCensusAnalyser;
     using NUnit.Framework;
+    using System;
 
     /// <summary>
     /// This class contains the code for testing all the use cases
@@ -80,8 +81,15 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenCSVStateCodeFile_WhenAnalyse_ReturnNumberOfRecordsMatch()
         {
-            int actual = CsvStateCensus.getnumberOfRecords(stateCode);
+            int actual =(int)CsvStateCensus.GetNumberOfRecords(stateCode);
             Assert.AreEqual(37,actual);
+        }
+
+        [Test]
+        public void GivenIncorrectfile_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
+        {
+            string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.csv";
+            Assert.AreEqual("File not found", (string)CsvStateCensus.GetNumberOfRecords(actualPath));
         }
     }
 }

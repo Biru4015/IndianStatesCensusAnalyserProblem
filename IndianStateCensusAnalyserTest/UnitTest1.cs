@@ -22,7 +22,7 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenNumOfState_WhenCheckingnumberOfRecords_ShouldReturnsNumOfRecords()
         {
-            int numberofRecords = (int)StateCensusAnalyser.Records(this.filePath);
+            int numberofRecords = (int)StateCensusAnalyser.NumberOfRecords(this.filePath);
             Assert.AreEqual(29, numberofRecords);
         }
 
@@ -31,11 +31,17 @@ namespace IndianStateCensusAnalyserTest
         /// For checking when incorrect file name entered raised exception
         /// </summary>
         [Test]
-        public void WivenFileNameIncorect_WhenCheckingFilePath_ShouldReturnsFileNotFoundeException()
+        public void WhenFileNameIncorect_WhenCheckingFilePath_ShouldReturnsFileNotFoundeException()
         {
-            string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.csv";
-            StateCensusAnalyser stateCensus = new StateCensusAnalyser(actualPath);
-            Assert.AreEqual("File not found", stateCensus.NumberOfRecords());
+            try
+            {
+                StateCensusAnalyser.NumberOfRecords(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.csv");
+            }
+            catch (CustomException exception)
+            {
+                Assert.AreEqual("File not found", exception.GetMessage);
+            }
+           
         }
 
         /// <summary>
@@ -45,9 +51,14 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenIncorrectFileFormat_WhenCheckingFileFormat_ShouldReturnsCustomException()
         {
-            string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.txt";
-            StateCensusAnalyser stateCensus = new StateCensusAnalyser(actualPath);
-            Assert.AreEqual("File format Incorrect", stateCensus.NumberOfRecords());
+            try
+            {
+                StateCensusAnalyser.NumberOfRecords(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.txt");
+            }
+            catch(CustomException exception)
+            {
+                Assert.AreEqual("File format Incorrect", exception.GetMessage);
+            }
         }
 
         /// <summary>
@@ -57,9 +68,14 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void WhenDelimeterNotPresent_WhenCkeckingInFile_ShouldReturnsCustomException()
         {
-            string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
-            StateCensusAnalyser stateCensus = new StateCensusAnalyser(actualPath);
-            Assert.AreEqual("Delimiter Incorrect", stateCensus.NumberOfRecords());
+            try
+            {
+                StateCensusAnalyser.NumberOfRecords(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData_DelimterChecking.csv");
+            }
+            catch (CustomException exception)
+            {
+                Assert.AreEqual("Header Incorrect or Delimeter Incorrect", exception.GetMessage);
+            }
         }
 
         /// <summary>
@@ -69,9 +85,14 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void WhenHeaderIncorrect_WhenAnalyse_ShouldReturnCustomException()
         {
-            string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData_Header.csv";
-            StateCensusAnalyser stateCensus = new StateCensusAnalyser(actualPath);
-            Assert.AreEqual("Header Incorrect", stateCensus.HeaderIncorrect());
+            try
+            {
+                StateCensusAnalyser.NumberOfRecords(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData_DelimterChecking.csv");
+            }
+            catch(CustomException exception)
+            {
+                Assert.AreEqual("Header Incorrect or Delimeter Incorrect", exception.GetMessage);
+            }
         }
 
         /// <summary>
@@ -81,8 +102,8 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenCSVStateCodeFile_WhenAnalyse_ReturnNumberOfRecordsMatch()
         {
-            int actual =(int)CsvStateCensus.GettingRecords(stateCode);
-            Assert.AreEqual(37,actual);
+            int actual = (int)CsvStateCensus.GetDataFromCSVFile(stateCode);
+            Assert.AreEqual(37, actual);
         }
 
         /// <summary>
@@ -92,9 +113,15 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenIncorrectfile_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
         {
-            string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.csv";
-            CsvStateCensus csvState = new CsvStateCensus(actualPath);
-            Assert.AreEqual("File not found", (string)csvState.GettingNumberOfRecords());
+            try
+            {
+                CsvStateCensus.GetDataFromCSVFile(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.csv");
+            }
+            catch(CustomException exception)
+            {
+                Assert.AreEqual("File not found", exception.GetMessage);
+            }
+           
         }
 
         /// <summary>
@@ -104,32 +131,51 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenIncorrectfileType_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
         {
-            string actualPath= @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.txt";
-            CsvStateCensus csvState = new CsvStateCensus(actualPath);
-            Assert.AreEqual("File format Incorrect",csvState.GettingNumberOfRecords());
+            try
+            {
+                CsvStateCensus.GetDataFromCSVFile(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.txt");
+            }
+            catch (CustomException exception)
+            {
+                Assert.AreEqual("File format Incorrect", exception.GetMessage);
+            }
+           
         }
 
         /// <summary>
-        ///Test case 1.4
+        /// Test case 2.4
         /// comma separated file Correct but delimiter Incorrect
         /// </summary>
         [Test]
         public void GivenIncorrectDelimiter_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
         {
-            string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
-            CsvStateCensus csvState = new CsvStateCensus(actualPath);
-            Assert.AreEqual("Delimiter Incorrect", csvState.GettingNumberOfRecords());
+            try
+            {
+                CsvStateCensus.GetDataFromCSVFile(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode_DelimterChecking.csv");
+            }
+            catch (CustomException exception)
+            {
+                Assert.AreEqual("Header Incorrect or Delimeter Incorrect", exception.GetMessage);
+            }
+            
         }
 
         /// <summary>
-        ///TC-1.5:csv file Correct but header Incorrect
+        /// Test case 2.5
+        /// csv file Correct but header Incorrect
         /// </summary>
         [Test]
         public void GivenIncorrectHeader_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
         {
-            string actualPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode_HeaderChecking.csv";
-            CsvStateCensus csvState = new CsvStateCensus(actualPath);
-            Assert.AreEqual("Header Incorrect", csvState.HeaderIncorrect());
+            try
+            {
+                CsvStateCensus.GetDataFromCSVFile(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode_HeaderChecking.csv");
+            }
+            catch(CustomException exception)
+            {
+                Assert.AreEqual("Header Incorrect or Delimeter Incorrect", exception.GetMessage);
+            }
         }
+
     }
 }

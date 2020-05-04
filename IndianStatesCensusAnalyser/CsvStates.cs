@@ -7,76 +7,31 @@ namespace IndianStatesCensusAnalyser
 {
     public class CsvStateCensus
     {
-        public string filePath;
-        public char delimiter = ',';
+        public string statecode;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public CsvStateCensus(string filePath)
+        public CsvStateCensus(string statecode)
         {
-            this.filePath = filePath;
+            this.statecode = statecode;
         }
-        public CsvStateCensus(string filepath, char delimiter)
-        {
-            this.filePath = filepath;
-            this.delimiter = delimiter;
-        }
+        
 
-        public static object GettingRecords(string filepath)
-        {
-            string[] a = File.ReadAllLines(filepath);
-            return a.Length - 1;
-        }
-
-        public Object GettingNumberOfRecords()
+        public static int GetDataFromCSVFile(string statecode, char delimiter = ',', string header = "SrNo,StateName,TIN,StateCode")
         {
             try
             {
-                if (Path.GetExtension(filePath) != ".csv")
-                {
-                    throw new CustomException("File format Incorrect", CustomException.Exception.File_format_Incorrect);
-                }
-                if (filePath != @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv")
-                {
-                    throw new CustomException("File not found", CustomException.Exception.File_not_found);
-                }
-
-                string[] data = File.ReadAllLines(filePath);
-
-                foreach (var element in data)
-                {
-                    if (!element.Contains(delimiter))
-                    {
-                        throw new CustomException("Delimiter Incorrect", CustomException.Exception.Delimiter_Incorrect);
-                    }
-                }
-                return data.Length - 1;
+                bool type = CSVOperations.CheckFileType(statecode, ".csv");
+                string[] records = CSVOperations.ReadCSVFile(statecode);
+                bool delimit = CSVOperations.CheckForDelimiter(records, delimiter);
+                bool head = CSVOperations.CheckForHeader(records, header);
+                int count = CSVOperations.CountRecords(records);
+                return count;
             }
-            catch (CustomException e)
+            catch (Exception)
             {
-                return e.Message;
-            }
-        }
-
-        /// <summary>
-        ///This method is for 
-        /// </summary>
-        /// <returns></returns>
-        public Object HeaderIncorrect()
-        {
-            try
-            {
-                string[] data = File.ReadAllLines(filePath);
-                if (data[0] != "SrNo,State,Name,TIN,StateCode")
-                {
-                    throw new CustomException("Header Incorrect", CustomException.Exception.Header_Incorrect);
-                }
-                return data.Length - 1;
-            }
-            catch (CustomException e)
-            {
-                return e.Message;
+                throw;
             }
         }
     }

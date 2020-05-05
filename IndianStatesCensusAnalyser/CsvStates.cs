@@ -9,15 +9,7 @@ namespace IndianStatesCensusAnalyser
     {
         public string statecode;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public CsvStateCensus(string statecode)
-        {
-            this.statecode = statecode;
-        }
-        
-
+        public delegate int GetCountFromCSVStates(string path, char delimiter = ',', string header = "SrNo,StateName,TIN,StateCode");
         public static int GetDataFromCSVFile(string statecode, char delimiter = ',', string header = "SrNo,StateName,TIN,StateCode")
         {
             try

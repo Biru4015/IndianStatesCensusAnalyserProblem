@@ -11,8 +11,8 @@ namespace IndianStateCensusAnalyserTest
     /// </summary>
     public class Tests
     {
-        GetCSVCount CSVStateCensusData = NumberOfRecords;
-        GetCountFromCSVStates StatesCodeCSV = GetDataFromCSVFile;
+        GetCSVCount csvstatecensus = CSVFactory.DelegateofStateCensusAnalyse();
+        GetCountFromCSVStates statesCodeCSV = CSVFactory.DelegateofStatecode();
 
         /// <summary>
         /// Reading the file path
@@ -27,7 +27,7 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenNumOfState_WhenCheckingnumberOfRecords_ShouldReturnsNumOfRecords()
         {
-            int numberofRecords = (int)CSVStateCensusData(this.filePath);
+            int numberofRecords = (int)csvstatecensus(this.filePath);
             Assert.AreEqual(29, numberofRecords);
         }
 
@@ -40,7 +40,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                CSVStateCensusData(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.csv");
+                csvstatecensus(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.csv");
             }
             catch (CustomException exception)
             {
@@ -58,7 +58,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                CSVStateCensusData(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.txt");
+                csvstatecensus(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.txt");
             }
             catch(CustomException exception)
             {
@@ -75,7 +75,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                CSVStateCensusData(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData_DelimterChecking.csv");
+                csvstatecensus(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData_DelimterChecking.csv");
             }
             catch (CustomException exception)
             {
@@ -92,7 +92,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                CSVStateCensusData(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData_DelimterChecking.csv");
+                csvstatecensus(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData_DelimterChecking.csv");
             }
             catch(CustomException exception)
             {
@@ -107,7 +107,7 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenCSVStateCodeFile_WhenAnalyse_ReturnNumberOfRecordsMatch()
         {
-            int actual = (int)StatesCodeCSV(stateCode);
+            int actual = (int)statesCodeCSV(stateCode);
             Assert.AreEqual(37, actual);
         }
 
@@ -120,7 +120,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                StatesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.csv");
+                statesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.csv");
             }
             catch(CustomException exception)
             {
@@ -138,7 +138,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                StatesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.txt");
+                statesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.txt");
             }
             catch (CustomException exception)
             {
@@ -156,7 +156,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                StatesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode_DelimterChecking.csv");
+                statesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode_DelimterChecking.csv");
             }
             catch (CustomException exception)
             {
@@ -174,7 +174,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                StatesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode_HeaderChecking.csv");
+                statesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode_HeaderChecking.csv");
             }
             catch(CustomException exception)
             {

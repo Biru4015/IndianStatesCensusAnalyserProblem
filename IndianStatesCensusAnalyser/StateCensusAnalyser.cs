@@ -7,17 +7,9 @@
     /// <summary>
     /// This class contains the main method main of Indian states census analyser problem
     /// </summary>
-    public class StateCensusAnalyser
+    public class StateCensusAnalyser : CSVBuilder
     {
         public string filePath;
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public StateCensusAnalyser(string filePath)
-        {
-            this.filePath = filePath;
-        }
 
         /// <summary>
         /// This is main method
@@ -44,6 +36,16 @@
             {
                 throw;
             }
+        }
+
+        int CSVBuilder.NumberOfRecords(string filepath, char delimiter, string header)
+        {
+            throw new NotImplementedException();
+        }
+
+        int CSVBuilder.GetDataFromCSVFile(string statecode, char delimiter, string header)
+        {
+            throw new NotImplementedException();
         }
     }
 }

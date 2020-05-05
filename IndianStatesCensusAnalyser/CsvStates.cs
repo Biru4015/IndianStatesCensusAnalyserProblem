@@ -5,7 +5,7 @@ using System.Text;
 using IndianStatesCensusAnalyser;
 namespace IndianStatesCensusAnalyser
 {
-    public class CsvStateCensus
+    public class CsvStateCensus : CSVBuilder
     {
         public string statecode;
 
@@ -25,6 +25,16 @@ namespace IndianStatesCensusAnalyser
             {
                 throw;
             }
+        }
+
+        int CSVBuilder.NumberOfRecords(string filepath, char delimiter, string header)
+        {
+            throw new NotImplementedException();
+        }
+
+        int CSVBuilder.GetDataFromCSVFile(string statecode, char delimiter, string header)
+        {
+            throw new NotImplementedException();
         }
     }
 }

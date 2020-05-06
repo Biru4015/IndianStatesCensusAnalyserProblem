@@ -2,32 +2,37 @@
 using System.Collections.Generic;
 using System.Text;
 using static IndianStatesCensusAnalyser.StateCensusAnalyser;
-using static IndianStatesCensusAnalyser.CsvStateCensus;
+using static IndianStatesCensusAnalyser.CsvStates;
 
 namespace IndianStatesCensusAnalyser
 {
     public class CSVFactory
     {
-        public static StateCensusAnalyser InstanceOfStateCensusAnalyzer()
+        // Method to creating instance of StateCensusAnalyser
+        public static CsvStateCensusData DelegateOfStateCensusAnalyser()
+        {
+            StateCensusAnalyser csvStateCensus = InstanceOfStateCensusAnalyser();
+            CsvStateCensusData getStateCensus = new CsvStateCensusData(StateCensusAnalyser.CsvStateCensusReadRecord);
+            return getStateCensus;
+        }
+
+        // Method to creating instance of CsvStates
+        public static CsvStateCodeData DelegateOfCsvStates()
+        {
+            CsvStates csvStateData = InstanceOfCsvStates();
+            CsvStateCodeData getStateData = new CsvStateCodeData(CsvStates.CsvStateCodeReadRecord);
+            return getStateData;
+        }
+
+        private static CsvStates InstanceOfCsvStates()
+        {
+            return new CsvStates();
+        }
+
+        private static StateCensusAnalyser InstanceOfStateCensusAnalyser()
         {
             return new StateCensusAnalyser();
         }
-        public static CsvStateCensus InstanceOfCSVStatesCensus()
-        {
-            return new CsvStateCensus();
-        }
-
-        public static GetCSVCount DelegateofStateCensusAnalyse()
-        {
-            StateCensusAnalyser csvStateCensus = InstanceOfStateCensusAnalyzer();
-            GetCSVCount getCSVCount = new GetCSVCount(StateCensusAnalyser.NumberOfRecords);
-            return getCSVCount;
-        }
-        public static GetCountFromCSVStates DelegateofStatecode()
-        {
-            CsvStateCensus statesCodeCSV = InstanceOfCSVStatesCensus();
-            GetCountFromCSVStates referToCSVSates = new GetCountFromCSVStates(CsvStateCensus.GetDataFromCSVFile);
-            return referToCSVSates;
-        }
     }
+
 }

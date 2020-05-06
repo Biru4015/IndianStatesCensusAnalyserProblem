@@ -5,36 +5,60 @@ using System.Text;
 using IndianStatesCensusAnalyser;
 namespace IndianStatesCensusAnalyser
 {
-    public class CsvStateCensus : CSVBuilder
+    public class CsvStates : ICSVBuilder
     {
-        public string statecode;
+        public static string stateCodePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+        // variables declaration
+        readonly string[] header;
+        readonly char delimeter;
+        readonly string givenPath;
 
-        public delegate int GetCountFromCSVStates(string path, char delimiter = ',', string header = "SrNo,StateName,TIN,StateCode");
-        public static int GetDataFromCSVFile(string statecode, char delimiter = ',', string header = "SrNo,StateName,TIN,StateCode")
+        // Default Constructor
+        public CsvStates()
         {
-            try
-            {
-                bool type = CSVOperations.CheckFileType(statecode, ".csv");
-                string[] records = CSVOperations.ReadCSVFile(statecode);
-                bool delimit = CSVOperations.CheckForDelimiter(records, delimiter);
-                bool head = CSVOperations.CheckForHeader(records, header);
-                int count = CSVOperations.CountRecords(records);
-                return count;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
-        int CSVBuilder.NumberOfRecords(string filepath, char delimiter, string header)
+        // CsvStates parameterised constructor
+        public CsvStates(string[] header, char delimeter, string givenPath)
+        {
+            this.header = header;
+            this.delimeter = delimeter;
+            this.givenPath = givenPath;
+        }
+
+        // Delegate is a reference type variable that hold the refenence to a method
+        public delegate object CsvStateCodeData(string[] header, char delimeter, string givenPath);
+
+        /// <CsvStateCodeReadRecord>
+        /// Creating object of class 'StateCensusAnalyser' as 'stateCodePathObject,
+        /// return object is returnrd to test case.
+        /// </CsvStateCodeReadRecord>
+        /// <returns></returnObject>
+        public static object CsvStateCodeReadRecord(string[] header, char delimeter, string givenPath)
+        {
+            CsvStateCensusReadRecord stateCodePathObject = new CsvStateCensusReadRecord(stateCodePath);
+            var returnObject = stateCodePathObject.ReadRecords(header, delimeter, givenPath);
+            return returnObject;
+        }
+
+        private static CsvStates InstanceOfCsvStates()
         {
             throw new NotImplementedException();
         }
 
-        int CSVBuilder.GetDataFromCSVFile(string statecode, char delimiter, string header)
+        private static StateCensusAnalyser InstanceOfStateCensusAnalyser()
         {
             throw new NotImplementedException();
         }
-    }
+
+        object ICSVBuilder.CsvStateCensusReadRecord(string[] header, char delimeter, string givenPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        object ICSVBuilder.CsvStateCodeReadRecord(string[] header, char delimeter, string givenPath)
+        {
+            throw new NotImplementedException();
+        }
+    }//End of class CsvStates    
 }

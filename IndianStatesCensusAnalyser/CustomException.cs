@@ -7,18 +7,23 @@ namespace IndianStatesCensusAnalyser
     /// <summary>
     /// This class contains the code of custom exception
     /// </summary>
-    public class CustomException : Exception
+    public class CensusAnalyserException : Exception
     {
-        public string message;
+        // ExceptionType variable declared
+        ExceptionType exception;
 
-        public string GetMessage 
-        { 
-            get => this.message; 
-        }
-        //constructor
-        public CustomException(string message)
+        // enum declaration to give constant values
+        public enum ExceptionType
         {
-            this.message = message;
+            FILE_NOT_FOUND,
+            INVALID_EXTENSION_OF_FILE,
+            INCORRECT_DELIMETER,
+            INVALID_HEADER_ERROR
+        }
+
+        public CensusAnalyserException(ExceptionType exception, string exceptionMessage) : base(exceptionMessage)
+        {
+            this.exception = exception;
         }
     }
 }

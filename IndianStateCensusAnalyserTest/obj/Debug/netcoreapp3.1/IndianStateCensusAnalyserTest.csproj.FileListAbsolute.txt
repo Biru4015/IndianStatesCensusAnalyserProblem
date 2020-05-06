@@ -97,3 +97,5 @@ C:\Users\Birendra Kumar\source\repos\IndianStateCensusAnalyserTest\obj\Debug\net
 C:\Users\Birendra Kumar\source\repos\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.dll
 C:\Users\Birendra Kumar\source\repos\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.pdb
 C:\Users\Birendra Kumar\source\repos\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.genruntimeconfig.cache
+C:\Users\Birendra Kumar\source\repos\IndianStateCensusAnalyserTest\bin\Debug\netcoreapp3.1\CsvHelper.dll
+C:\Users\Birendra Kumar\source\repos\IndianStateCensusAnalyserTest\bin\Debug\netcoreapp3.1\LumenWorks.Framework.IO.dll

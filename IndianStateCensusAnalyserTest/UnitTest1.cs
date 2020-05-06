@@ -3,7 +3,7 @@ namespace IndianStateCensusAnalyserTest
     using IndianStatesCensusAnalyser;
     using NUnit.Framework;
     using System;
-    using static IndianStatesCensusAnalyser.CsvStateCensus;
+    using static IndianStatesCensusAnalyser.CsvStates;
     using static IndianStatesCensusAnalyser.StateCensusAnalyser;
 
     /// <summary>
@@ -11,14 +11,10 @@ namespace IndianStateCensusAnalyserTest
     /// </summary>
     public class Tests
     {
-        GetCSVCount csvstatecensus = CSVFactory.DelegateofStateCensusAnalyse();
-        GetCountFromCSVStates statesCodeCSV = CSVFactory.DelegateofStatecode();
-
-        /// <summary>
-        /// Reading the file path
-        /// </summary>
-        private string filePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
-        private string stateCode = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+        //with NameSpace Assembly reference 
+        // DeligateMethod -------Object-------Reference to delegate method
+        readonly CsvStateCensusData stateCensus = CSVFactory.DelegateOfStateCensusAnalyser();
+        readonly CsvStateCodeData stateCode = CSVFactory.DelegateOfCsvStates();
 
         /// <summary>
         /// Test case 1.1
@@ -27,8 +23,11 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenNumOfState_WhenCheckingnumberOfRecords_ShouldReturnsNumOfRecords()
         {
-            int numberofRecords = (int)csvstatecensus(this.filePath);
-            Assert.AreEqual(29, numberofRecords);
+            char delimeter = ',';
+            string[] header = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
+            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
+            var numberOfRecords = stateCensus(header, delimeter, path);
+            Assert.AreEqual(29, numberOfRecords);
         }
 
         /// <summary>
@@ -38,15 +37,11 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void WhenFileNameIncorect_WhenCheckingFilePath_ShouldReturnsFileNotFoundeException()
         {
-            try
-            {
-                csvstatecensus(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.csv");
-            }
-            catch (CustomException exception)
-            {
-                Assert.AreEqual("File not found", exception.GetMessage);
-            }
-           
+            string incorrectPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.csv";
+            char delimeter = ',';
+            string[] header = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
+            object exceptionMessage = stateCensus(header, delimeter, incorrectPath);
+            Assert.AreEqual("Invalid file", exceptionMessage);
         }
 
         /// <summary>
@@ -56,14 +51,11 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenIncorrectFileFormat_WhenCheckingFileFormat_ShouldReturnsCustomException()
         {
-            try
-            {
-                csvstatecensus(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.txt");
-            }
-            catch(CustomException exception)
-            {
-                Assert.AreEqual("File format Incorrect", exception.GetMessage);
-            }
+            char delimeter = ',';
+            string[] header = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
+            string inCorrectExtensionPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.txt";
+            object exceptionMessage = stateCensus(header, delimeter, inCorrectExtensionPath);
+            Assert.AreEqual("Invalid Extension of file", exceptionMessage);
         }
 
         /// <summary>
@@ -73,14 +65,10 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void WhenDelimeterNotPresent_WhenCkeckingInFile_ShouldReturnsCustomException()
         {
-            try
-            {
-                csvstatecensus(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData_DelimterChecking.csv");
-            }
-            catch (CustomException exception)
-            {
-                Assert.AreEqual("Header Incorrect or Delimeter Incorrect", exception.GetMessage);
-            }
+            char userDelimeter = ';';
+            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
+            object exceptionMessage = stateCensus(null, userDelimeter, path);
+            Assert.AreEqual("Incorrect Delimeter", exceptionMessage);
         }
 
         /// <summary>
@@ -90,14 +78,11 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void WhenHeaderIncorrect_WhenAnalyse_ShouldReturnCustomException()
         {
-            try
-            {
-                csvstatecensus(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData_DelimterChecking.csv");
-            }
-            catch(CustomException exception)
-            {
-                Assert.AreEqual("Header Incorrect or Delimeter Incorrect", exception.GetMessage);
-            }
+            string[] header = { "State", "InvalidHeader", "AreaInSqKm", "DensityPerSqKm" };
+            char userDelimeter = ',';
+            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
+            object exceptionMessage = stateCensus(header, userDelimeter, path);
+            Assert.AreEqual("Invalid Header", exceptionMessage);
         }
 
         /// <summary>
@@ -107,8 +92,11 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenCSVStateCodeFile_WhenAnalyse_ReturnNumberOfRecordsMatch()
         {
-            int actual = (int)statesCodeCSV(stateCode);
-            Assert.AreEqual(37, actual);
+            char delimeter = ',';
+            string[] header = { "SrNo", "State", "PIN", "StateCode" };
+            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+            var numberOfRecords = stateCode(header, delimeter, path);
+            Assert.AreEqual(37, numberOfRecords);
         }
 
         /// <summary>
@@ -118,15 +106,11 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenIncorrectfile_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
         {
-            try
-            {
-                statesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.csv");
-            }
-            catch(CustomException exception)
-            {
-                Assert.AreEqual("File not found", exception.GetMessage);
-            }
-           
+            char delimeter = ',';
+            string[] header = { "SrNo", "State", "PIN", "StateCode" };
+            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.csv";
+            object exceptionMessage = stateCode(header, delimeter, path);
+            Assert.AreEqual("Invalid file", exceptionMessage);
         }
 
         /// <summary>
@@ -136,15 +120,11 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenIncorrectfileType_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
         {
-            try
-            {
-                statesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.txt");
-            }
-            catch (CustomException exception)
-            {
-                Assert.AreEqual("File format Incorrect", exception.GetMessage);
-            }
-           
+            char delimeter = ',';
+            string[] header = { "SrNo", "State", "PIN", "StateCode" };
+            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.txt";
+            object exceptionMessage = stateCode(header, delimeter, path);
+            Assert.AreEqual("Invalid Extension of file", exceptionMessage);
         }
 
         /// <summary>
@@ -154,15 +134,11 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenIncorrectDelimiter_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
         {
-            try
-            {
-                statesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode_DelimterChecking.csv");
-            }
-            catch (CustomException exception)
-            {
-                Assert.AreEqual("Header Incorrect or Delimeter Incorrect", exception.GetMessage);
-            }
-            
+            char delimeter = ';';
+            string[] header = { "SrNo", "State", "PIN", "StateCode" };
+            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+            object exceptionMessage = stateCode(header, delimeter, path);
+            Assert.AreEqual("Incorrect Delimeter", exceptionMessage);
         }
 
         /// <summary>
@@ -172,15 +148,11 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void GivenIncorrectHeader_WhenAnalyse_ShouldThrowExceptionforstatecodeCSV()
         {
-            try
-            {
-                statesCodeCSV(@"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode_HeaderChecking.csv");
-            }
-            catch(CustomException exception)
-            {
-                Assert.AreEqual("Header Incorrect or Delimeter Incorrect", exception.GetMessage);
-            }
+            char delimeter = ',';
+            string[] header = { "SrNo", "InvalidState", "PIN", "StateCode" };
+            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+            object exceptionMessage = stateCode(header, delimeter, path);
+            Assert.AreEqual("Invalid Header", exceptionMessage);
         }
-
     }
 }

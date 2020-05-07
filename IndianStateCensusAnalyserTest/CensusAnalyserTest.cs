@@ -16,9 +16,10 @@ namespace IndianStateCensusAnalyserTest
         readonly CsvStateCensusData stateCensus = CSVFactory.DelegateOfStateCensusAnalyser();
         readonly CsvStateCodeData stateCode = CSVFactory.DelegateOfCsvStates();
 
+        public string stateCensusDataPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
+        public string stateCodePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
         public string jsonPathstateCensus = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.json";
         public string jsonPathStateCode = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.json";
-
 
         /// <summary>
         /// Test case 1.1
@@ -29,7 +30,7 @@ namespace IndianStateCensusAnalyserTest
         {
             char delimeter = ',';
             string[] header = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
-            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
+            string path = stateCensusDataPath;
             var numberOfRecords = stateCensus(header, delimeter, path);
             Assert.AreEqual(29, numberOfRecords);
         }
@@ -70,7 +71,7 @@ namespace IndianStateCensusAnalyserTest
         public void WhenDelimeterNotPresent_WhenCkeckingInFile_ShouldReturnsCustomException()
         {
             char userDelimeter = ';';
-            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
+            string path = stateCensusDataPath;
             object exceptionMessage = stateCensus(null, userDelimeter, path);
             Assert.AreEqual("Incorrect Delimeter", exceptionMessage);
         }
@@ -84,7 +85,7 @@ namespace IndianStateCensusAnalyserTest
         {
             string[] header = { "State", "InvalidHeader", "AreaInSqKm", "DensityPerSqKm" };
             char userDelimeter = ',';
-            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
+            string path = stateCensusDataPath;
             object exceptionMessage = stateCensus(header, userDelimeter, path);
             Assert.AreEqual("Invalid Header", exceptionMessage);
         }
@@ -98,7 +99,7 @@ namespace IndianStateCensusAnalyserTest
         {
             char delimeter = ',';
             string[] header = { "SrNo", "State", "PIN", "StateCode" };
-            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+            string path = stateCodePath;
             var numberOfRecords = stateCode(header, delimeter, path);
             Assert.AreEqual(37, numberOfRecords);
         }
@@ -140,7 +141,7 @@ namespace IndianStateCensusAnalyserTest
         {
             char delimeter = ';';
             string[] header = { "SrNo", "State", "PIN", "StateCode" };
-            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+            string path = stateCodePath;
             object exceptionMessage = stateCode(header, delimeter, path);
             Assert.AreEqual("Incorrect Delimeter", exceptionMessage);
         }
@@ -154,7 +155,7 @@ namespace IndianStateCensusAnalyserTest
         {
             char delimeter = ',';
             string[] header = { "SrNo", "InvalidState", "PIN", "StateCode" };
-            string path = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+            string path = stateCodePath;
             object exceptionMessage = stateCode(header, delimeter, path);
             Assert.AreEqual("Invalid Header", exceptionMessage);
         }
@@ -167,8 +168,7 @@ namespace IndianStateCensusAnalyserTest
         public void CheckStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnFirstStateAP()
         {
             string expected = "Andhra Pradesh";
-            string stateCensusfilePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
-            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCensusfilePath, jsonPathstateCensus, "State");
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCensusDataPath, jsonPathstateCensus, "State");
             Assert.AreEqual(expected, lastValue);
         }
 
@@ -180,8 +180,7 @@ namespace IndianStateCensusAnalyserTest
         public void CheckStateCensusDataAndAddToJsonPathAndSorting_WhenSorted__ShouldReturnLastStateWB()
         {
             string expected = "West Bengal";
-            string stateCensusfilePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
-            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCensusfilePath, jsonPathstateCensus, "State");
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCensusDataPath, jsonPathstateCensus, "State");
             Assert.AreEqual(expected, lastValue);
         }
 
@@ -193,8 +192,7 @@ namespace IndianStateCensusAnalyserTest
         public void CheckStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnsFirstStateCode()
         {
             string expected = "AD";
-            string stateCensusfilePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
-            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCensusfilePath, jsonPathStateCode, "StateCode");
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCodePath, jsonPathStateCode, "StateCode");
             Assert.AreEqual(expected, lastValue);
         }
 
@@ -206,8 +204,7 @@ namespace IndianStateCensusAnalyserTest
         public void CheckStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnsLatStateCode()
         {
             string expected = "WB";
-            string stateCensusfilePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
-            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCensusfilePath, jsonPathStateCode, "StateCode");
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCodePath, jsonPathStateCode, "StateCode");
             Assert.AreEqual(expected, lastValue);
         }
     }

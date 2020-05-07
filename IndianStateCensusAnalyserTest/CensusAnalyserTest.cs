@@ -17,6 +17,8 @@ namespace IndianStateCensusAnalyserTest
         readonly CsvStateCodeData stateCode = CSVFactory.DelegateOfCsvStates();
 
         public string jsonPathstateCensus = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.json";
+        public string jsonPathStateCode = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.json";
+
 
         /// <summary>
         /// Test case 1.1
@@ -180,6 +182,32 @@ namespace IndianStateCensusAnalyserTest
             string expected = "West Bengal";
             string stateCensusfilePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
             string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCensusfilePath, jsonPathstateCensus, "State");
+            Assert.AreEqual(expected, lastValue);
+        }
+
+        /// <summary>
+        /// Test case 4.1
+        /// Test for StateCodeCsv and json path to add into json after sorting return return first stateCode.
+        /// </summary>
+        [Test]
+        public void CheckStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnsFirstStateCode()
+        {
+            string expected = "AD";
+            string stateCensusfilePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCensusfilePath, jsonPathStateCode, "StateCode");
+            Assert.AreEqual(expected, lastValue);
+        }
+
+        /// <summary>
+        /// Test case 4.2
+        /// Test for StateCodeCsv and json path to add into json after sorting return return last stateCode.
+        /// </summary>
+        [Test]
+        public void CheckStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnsLatStateCode()
+        {
+            string expected = "WB";
+            string stateCensusfilePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCensusfilePath, jsonPathStateCode, "StateCode");
             Assert.AreEqual(expected, lastValue);
         }
     }

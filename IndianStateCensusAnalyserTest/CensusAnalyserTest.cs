@@ -196,5 +196,17 @@ namespace IndianStateCensusAnalyserTest
             string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCodePath, jsonPathStateCode, "StateCode");
             Assert.AreEqual(expected, lastValue);
         }
+
+        /// <summary>
+        /// Test case 5.1
+        /// Test case for checking most populous state census state file.
+        /// </summary>
+        [Test]
+        public void CheckingMostPopulousState_WhenSorted_ShouldReturnsTheNumberOfStates()
+        {
+            string expected = "199812341";
+            string mostPopulation = JSONCensus.ReturnDataNumberOfStatesSortCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "Population");
+            Assert.AreEqual(expected, mostPopulation);
+        }
     }
 }

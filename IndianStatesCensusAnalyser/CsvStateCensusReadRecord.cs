@@ -25,7 +25,14 @@ namespace IndianStatesCensusAnalyser
             this.actualPath = filePath;
         }
 
-        // ReadRecords Method
+        /// <summary>
+        /// Read the record of given file path
+        /// Return number of record or exception message
+        /// </summary>
+        /// <param name="passHeader"></param>
+        /// <param name="in_delimeter"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public object ReadRecords(string[] passHeader = null, char in_delimeter = ',', string filePath = null)
         {
             try
@@ -80,10 +87,15 @@ namespace IndianStatesCensusAnalyser
             {
                 throw new Exception(exception.Message);
             }
-        }// End of ReadRecords
+        }
 
-        //method will compare two headers 
-        // if same return true , if not return false
+        /// <summary>
+        /// Method will compare two headers
+        /// If same return true , if not return false
+        /// </summary>
+        /// <param name="passHeader"></param>
+        /// <param name="headers"></param>
+        /// <returns></returns>
         private bool IsHeaderSame(string[] passHeader, string[] headers)
         {
             if (passHeader.Length != headers.Length)
@@ -99,9 +111,13 @@ namespace IndianStatesCensusAnalyser
                 }
             }
             return true;
-        }//End of isHeadersame
+        }
 
-
+        /// <summary>
+        /// This method conatins the code of created dictionary
+        /// </summary>
+        /// <param name="records"></param>
+        /// <returns></returns>
         public int CountRecords(string[] records)
         {
             int j = 1;
@@ -123,6 +139,12 @@ namespace IndianStatesCensusAnalyser
             return map.Count;
         }
 
+        /// <summary>
+        /// This method contains the code for sorting json file based on key
+        /// </summary>
+        /// <param name="jsonFilePath"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static JArray SortingJsonBasedOnKey(string jsonFilePath, string key)
         {
             string jsonFile = File.ReadAllText(jsonFilePath);
@@ -143,6 +165,12 @@ namespace IndianStatesCensusAnalyser
             return CensusArray;
         }
 
+        /// <summary>
+        /// This method contains the code for sorting based on value number
+        /// </summary>
+        /// <param name="jsonPath"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static JArray SortJsonBasedOnKeyAndValueIsNumber(string jsonPath, string key)
         {
             string jsonFile = File.ReadAllText(jsonPath);

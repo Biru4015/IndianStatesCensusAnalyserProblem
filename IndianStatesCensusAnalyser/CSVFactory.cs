@@ -8,7 +8,10 @@ namespace IndianStatesCensusAnalyser
 {
     public class CSVFactory
     {
-        // Method to creating instance of StateCensusAnalyser
+        /// <summary>
+        /// Method to creating instance of StateCensusAnalyser
+        /// </summary>
+        /// <returns>getStateCensus</returns>
         public static CsvStateCensusDataDao DelegateOfStateCensusAnalyser()
         {
             StateCensusAnalyserDao csvStateCensus = InstanceOfStateCensusAnalyser();
@@ -16,7 +19,10 @@ namespace IndianStatesCensusAnalyser
             return getStateCensus;
         }
 
-        // Method to creating instance of CsvStates
+        /// <summary>
+        /// Method to creating instance of CsvStates
+        /// </summary>
+        /// <returns></returns>
         public static CsvStateCodeDataDao DelegateOfCsvStates()
         {
             CsvStatesDao csvStateData = InstanceOfCsvStates();

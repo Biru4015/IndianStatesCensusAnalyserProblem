@@ -208,5 +208,17 @@ namespace IndianStateCensusAnalyserTest
             string mostPopulation = JSONCensus.ReturnDataNumberOfStatesSortCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "Population");
             Assert.AreEqual(expected, mostPopulation);
         }
+
+        /// <summary>
+        /// Test case 6.1
+        /// Test case for checking most population density per kilometer
+        /// </summary>
+        [Test]
+        public void CheckingMostPopulationDensityPerKm_WhenSorted_ShouldReturnsMostDensityPerSqKm()
+        {
+            string expected = "1102";
+            string mostDensityPerKm = JSONCensus.ReturnDataNumberOfStatesSortCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "DensityPerSqKm");
+            Assert.AreEqual(expected, mostDensityPerKm);
+        }
     }
 }

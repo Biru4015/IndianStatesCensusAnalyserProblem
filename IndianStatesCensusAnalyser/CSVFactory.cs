@@ -1,37 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static IndianStatesCensusAnalyser.StateCensusAnalyser;
-using static IndianStatesCensusAnalyser.CsvStates;
+using static IndianStatesCensusAnalyser.StateCensusAnalyserDao;
+using static IndianStatesCensusAnalyser.CsvStatesDao;
 
 namespace IndianStatesCensusAnalyser
 {
     public class CSVFactory
     {
         // Method to creating instance of StateCensusAnalyser
-        public static CsvStateCensusData DelegateOfStateCensusAnalyser()
+        public static CsvStateCensusDataDao DelegateOfStateCensusAnalyser()
         {
-            StateCensusAnalyser csvStateCensus = InstanceOfStateCensusAnalyser();
-            CsvStateCensusData getStateCensus = new CsvStateCensusData(StateCensusAnalyser.CsvStateCensusReadRecord);
+            StateCensusAnalyserDao csvStateCensus = InstanceOfStateCensusAnalyser();
+            CsvStateCensusDataDao getStateCensus = new CsvStateCensusDataDao(StateCensusAnalyserDao.CsvStateCensusReadRecord);
             return getStateCensus;
         }
 
         // Method to creating instance of CsvStates
-        public static CsvStateCodeData DelegateOfCsvStates()
+        public static CsvStateCodeDataDao DelegateOfCsvStates()
         {
-            CsvStates csvStateData = InstanceOfCsvStates();
-            CsvStateCodeData getStateData = new CsvStateCodeData(CsvStates.CsvStateCodeReadRecord);
+            CsvStatesDao csvStateData = InstanceOfCsvStates();
+            CsvStateCodeDataDao getStateData = new CsvStateCodeDataDao(CsvStatesDao.CsvStateCodeReadRecord);
             return getStateData;
         }
 
-        private static CsvStates InstanceOfCsvStates()
+        private static CsvStatesDao InstanceOfCsvStates()
         {
-            return new CsvStates();
+            return new CsvStatesDao();
         }
 
-        private static StateCensusAnalyser InstanceOfStateCensusAnalyser()
+        private static StateCensusAnalyserDao InstanceOfStateCensusAnalyser()
         {
-            return new StateCensusAnalyser();
+            return new StateCensusAnalyserDao();
         }
     }
 

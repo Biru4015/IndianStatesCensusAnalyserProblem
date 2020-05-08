@@ -7,7 +7,7 @@
     /// <summary>
     /// This class contains the main method main of Indian states census analyser problem
     /// </summary>
-    public class StateCensusAnalyser : ICSVBuilder
+    public class StateCensusAnalyserDao : ICSVBuilder
     {
         public static string stateCensusPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
         // variables declaration
@@ -21,12 +21,12 @@
         }//end: static void Main(string[] args)
 
         // Default Constructor
-        public StateCensusAnalyser()
+        public StateCensusAnalyserDao()
         {
         }
 
         // CsvStates parameterised constructor
-        public StateCensusAnalyser(string[] header, char delimeter, string givenPath)
+        public StateCensusAnalyserDao(string[] header, char delimeter, string givenPath)
         {
             this.header = header;
             this.delimeter = delimeter;
@@ -34,7 +34,7 @@
         }
 
         // Delegate is a reference type variable that hold the refenence to a method
-        public delegate object CsvStateCensusData(string[] header, char delimeter, string givenPath);
+        public delegate object CsvStateCensusDataDao(string[] header, char delimeter, string givenPath);
 
         /// <CsvStateCodeReadRecord>
         /// Creating object of class 'CensusReadRecord' as 'stateCodePathObject,

@@ -14,12 +14,17 @@ namespace IndianStatesCensusAnalyser
         char delimeter;
         int numberOfRecord;
 
-        // Default Constrructor
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public CsvStateCensusReadRecord()
         {
         }
 
-        //Parameterised constructor
+        /// <summary>
+        /// Parameterised constructor 
+        /// </summary>
+        /// <param name="filePath"></param>
         public CsvStateCensusReadRecord(string filePath = null)
         {
             this.actualPath = filePath;
@@ -46,6 +51,8 @@ namespace IndianStatesCensusAnalyser
                     throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, "Invalid file");
                 }
 
+                /// Streams are used to read/write data from large files
+                /// CsvReader is open source C# library to read CSV data from strings/textFiles
                 CsvReader csvRecords = new CsvReader(new StreamReader(filePath), true);
                 int fieldCount = csvRecords.FieldCount;
                 string[] headers = csvRecords.GetFieldHeaders();

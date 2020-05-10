@@ -7,18 +7,25 @@ namespace IndianStatesCensusAnalyser
 {
     public class CsvStatesDao : ICSVBuilder
     {
-        public static string stateCodePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
-        // variables declaration
+        public static string stateCodePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\CSVFiles\StateCode.csv";
+        //// variables declaration
         readonly string[] header;
         readonly char delimeter;
         readonly string givenPath;
 
-        // Default Constructor
+        /// <summary>
+        ///  Default Constructor
+        /// </summary>
         public CsvStatesDao()
         {
         }
 
-        // CsvStates parameterised constructor
+        /// <summary>
+        /// CsvStates parameterised constructor 
+        /// </summary>
+        /// <param name="header"></param>
+        /// <param name="delimeter"></param>
+        /// <param name="givenPath"></param>
         public CsvStatesDao(string[] header, char delimeter, string givenPath)
         {
             this.header = header;
@@ -26,7 +33,7 @@ namespace IndianStatesCensusAnalyser
             this.givenPath = givenPath;
         }
 
-        // Delegate is a reference type variable that hold the refenence to a method
+        //// Delegate is a reference type variable that hold the refenence to a method
         public delegate object CsvStateCodeDataDao(string[] header, char delimeter, string givenPath);
 
         /// <CsvStateCodeReadRecord>
@@ -60,5 +67,5 @@ namespace IndianStatesCensusAnalyser
         {
             throw new NotImplementedException();
         }
-    }//End of class CsvStates    
+    }    
 }

@@ -9,23 +9,35 @@
     /// </summary>
     public class StateCensusAnalyserDao : ICSVBuilder
     {
-        public static string stateCensusPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
-        // variables declaration
+        public static string stateCensusPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\CSVFiles\StateCensusData.csv";
+        
+        //// variables declaration
         string[] header;
         char delimeter;
         string givenPath;
 
-        // Main Method
+        /// <summary>
+        /// Main Method
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
-        }//end: static void Main(string[] args)
+            Console.WriteLine("WELCOME TO INDIAN CENSUS ANALYSER");
+        }
 
-        // Default Constructor
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public StateCensusAnalyserDao()
         {
         }
 
-        // CsvStates parameterised constructor
+        /// <summary>
+        /// CensusAnalyser Parameterised constructor
+        /// </summary>
+        /// <param name="header"></param>
+        /// <param name="delimeter"></param>
+        /// <param name="givenPath"></param>
         public StateCensusAnalyserDao(string[] header, char delimeter, string givenPath)
         {
             this.header = header;
@@ -33,7 +45,7 @@
             this.givenPath = givenPath;
         }
 
-        // Delegate is a reference type variable that hold the refenence to a method
+        //// Delegate is a reference type variable that hold the refenence to a method
         public delegate object CsvStateCensusDataDao(string[] header, char delimeter, string givenPath);
 
         /// <CsvStateCodeReadRecord>

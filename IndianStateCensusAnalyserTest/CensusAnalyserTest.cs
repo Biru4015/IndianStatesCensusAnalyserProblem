@@ -17,16 +17,16 @@ namespace IndianStateCensusAnalyserTest
         readonly CsvStateCodeDataDao stateCode = CSVFactory.DelegateOfCsvStates();
 
         //// FilePath ,Valid and Invalid Headers of StateCensusData
-        public string stateCensusDataPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.csv";
-        public string stateCensusDataPathIncorrectName = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusDatas.csv";
-        public string stateCensusDataPathIncorrectExtension = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.txt";
+        public string stateCensusDataPath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\CSVFiles\StateCensusData.csv";
+        public string stateCensusDataPathIncorrectName = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\CSVFiles\StateCensusDatas.csv";
+        public string stateCensusDataPathIncorrectExtension = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\CSVFiles\StateCensusData.txt";
         public string[] headerStateCensus = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
         public string[] headerStateCensusInvalid = { "State", "InvalidHeader", "AreaInSqKm", "DensityPerSqKm" };
 
         //// FilePath ,Valid and Invalid Headers of StateCode
-        public string stateCodePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.csv";
-        public string stateCodePathIncorrectName = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCodes.csv";
-        public string stateCodePathIncorrectExtension = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.txt";
+        public string stateCodePath = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\CSVFiles\StateCode.csv";
+        public string stateCodePathIncorrectName = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\CSVFiles\StateCodes.csv";
+        public string stateCodePathIncorrectExtension = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\CSVFiles\StateCode.txt";
         public string[] headerStateCode = { "SrNo", "State", "PIN", "StateCode" };
         public string[] headerStateCodeInvalid = { "SrNo", "StateInvalid", "PIN", "StateCode" };
 
@@ -35,8 +35,8 @@ namespace IndianStateCensusAnalyserTest
         char IncorrectDelimeter = ';';
 
         //// FilePath of JSON files
-        public string jsonPathstateCensus = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCensusData.json";
-        public string jsonPathStateCode = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\Files\StateCode.json";
+        public string jsonPathstateCensus = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\JsonFiles\StateCensusData.json";
+        public string jsonPathStateCode = @"C:\Users\Birendra Kumar\source\repos\IndianStatesCensusAnalyser\JsonFiles\StateCode.json";
 
         /// <summary>
         /// Test case 1.1
@@ -47,7 +47,6 @@ namespace IndianStateCensusAnalyserTest
         {
             var numberOfRecords = stateCensus(headerStateCensus, delimeter, stateCensusDataPath);
             Assert.AreEqual(29, numberOfRecords);
-
         }
 
         /// <summary>
@@ -254,7 +253,7 @@ namespace IndianStateCensusAnalyserTest
         {
             string expected = "3702";
             string smallestStateArea = JSONCensus.ReturnDataNumberOfStatesSortLowestCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "AreaInSqKm");
-            Assert.AreEqual(expected, smallestStateArea);
+            Assert.AreEqual(expected,smallestStateArea);
         }
     }
 }

@@ -6,6 +6,9 @@ using static IndianStatesCensusAnalyser.CsvStatesDao;
 
 namespace IndianStatesCensusAnalyser
 {
+    /// <summary>
+    /// This is CSV Factory class
+    /// </summary>
     public class CSVFactory
     {
         /// <summary>

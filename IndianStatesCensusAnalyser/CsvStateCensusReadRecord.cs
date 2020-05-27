@@ -7,9 +7,12 @@ using LumenWorks.Framework.IO.Csv;
 
 namespace IndianStatesCensusAnalyser
 {
+    /// <summary>
+    /// This class is created for read csv records.
+    /// </summary>
     public class CsvStateCensusReadRecord
     {
-        // Variables
+        //// Variables
         string actualPath;
         char delimeter;
         int numberOfRecord;
@@ -51,13 +54,13 @@ namespace IndianStatesCensusAnalyser
                     throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, "Invalid file");
                 }
 
-                /// Streams are used to read/write data from large files
-                /// CsvReader is open source C# library to read CSV data from strings/textFiles
+                //// Streams are used to read/write data from large files
+                //// CsvReader is open source C# library to read CSV data from strings/textFiles
                 CsvReader csvRecords = new CsvReader(new StreamReader(filePath), true);
                 int fieldCount = csvRecords.FieldCount;
                 string[] headers = csvRecords.GetFieldHeaders();
                 delimeter = csvRecords.Delimiter;
-                // string ArrayList
+                //// string ArrayList
                 List<string[]> record = new List<string[]>();
 
                 while (csvRecords.ReadNextRecord())

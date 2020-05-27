@@ -35,6 +35,7 @@ namespace IndianStatesCensusAnalyser
             File.WriteAllText(jsonFilepath, jsonArray);
             return CsvStateCensusReadRecord.RetriveFirstDataOnKey(jsonFilepath, key);
         }
+
         /// <summary>
         /// Method to write the last state data using json
         /// </summary>

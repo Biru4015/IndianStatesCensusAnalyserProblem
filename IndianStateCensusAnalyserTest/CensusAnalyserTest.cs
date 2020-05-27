@@ -43,7 +43,7 @@ namespace IndianStateCensusAnalyserTest
         /// For checking number of records in StateCensusData are matches or not
         /// </summary>
         [Test]
-        public void GivenNumOfState_WhenCheckingnumberOfRecords_ShouldReturnsNumOfRecords()
+        public void GivenNumberOfState_WhenCheckingnumberOfRecords_ShouldReturnsNumOfRecords()
         {
             var numberOfRecords = stateCensus(headerStateCensus, delimeter, stateCensusDataPath);
             Assert.AreEqual(29, numberOfRecords);
@@ -54,7 +54,7 @@ namespace IndianStateCensusAnalyserTest
         /// For checking when incorrect file name entered raised exception
         /// </summary>
         [Test]
-        public void WhenFileNameIncorect_WhenCheckingFilePath_ShouldReturnsFileNotFoundeException()
+        public void GivenFileNameIncorect_WhenCheckingFilePath_ShouldReturnsFileNotFoundeException()
         {
             object exceptionMessage = stateCensus(headerStateCensus, delimeter, stateCensusDataPathIncorrectName);
             Assert.AreEqual("Invalid file", exceptionMessage);
@@ -76,7 +76,7 @@ namespace IndianStateCensusAnalyserTest
         /// comma separated value file Correct but delimiter Incorrect
         /// </summary>
         [Test]
-        public void WhenDelimeterNotPresent_WhenCkeckingInFile_ShouldReturnsCustomException()
+        public void GivenDelimeterNotPresent_WhenCkeckingInFile_ShouldReturnsCustomException()
         {
             object exceptionMessage = stateCensus(headerStateCensus, IncorrectDelimeter, stateCensusDataPath);
             Assert.AreEqual("Incorrect Delimeter", exceptionMessage);
@@ -87,7 +87,7 @@ namespace IndianStateCensusAnalyserTest
         /// comma separated value file Correct but header name is incorrect in file
         /// </summary>
         [Test]
-        public void WhenHeaderIncorrect_WhenAnalyse_ShouldReturnCustomException()
+        public void GivenHeaderIncorrect_WhenAnalyse_ShouldReturnCustomException()
         {
             object exceptionMessage = stateCensus(headerStateCensusInvalid, delimeter, stateCensusDataPath);
             Assert.AreEqual("Invalid Header", exceptionMessage);
@@ -153,7 +153,7 @@ namespace IndianStateCensusAnalyserTest
         /// Test for StateCensuscsv and json path to add into json after sorting return return first state.
         /// </summary>
         [Test]
-        public void CheckStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnFirstStateAP()
+        public void GivenStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnFirstStateAP()
         {
             string expected = "Andhra Pradesh";
             string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCensusDataPath, jsonPathstateCensus, "State");
@@ -165,7 +165,7 @@ namespace IndianStateCensusAnalyserTest
         /// Test for StateCensuscsv and json path to add into json after sorting return return last state.
         /// </summary>
         [Test]
-        public void CheckStateCensusDataAndAddToJsonPathAndSorting_WhenSorted__ShouldReturnLastStateWB()
+        public void GivenStateCensusDataAndAddToJsonPathAndSorting_WhenSorted__ShouldReturnLastStateWB()
         {
             string expected = "West Bengal";
             string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCensusDataPath, jsonPathstateCensus, "State");
@@ -177,7 +177,7 @@ namespace IndianStateCensusAnalyserTest
         /// Test for StateCodeCsv and json path to add into json after sorting return return first stateCode.
         /// </summary>
         [Test]
-        public void CheckStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnsFirstStateCode()
+        public void GivenStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnsFirstStateCode()
         {
             string expected = "AD";
             string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCodePath, jsonPathStateCode, "StateCode");
@@ -189,7 +189,7 @@ namespace IndianStateCensusAnalyserTest
         /// Test for StateCodeCsv and json path to add into json after sorting return return last stateCode.
         /// </summary>
         [Test]
-        public void CheckStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnsLatStateCode()
+        public void GivenStateCensusDataAndAddToJsonPathAndSorting_WhenSorted_ShouldReturnsLatStateCode()
         {
             string expected = "WB";
             string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCodePath, jsonPathStateCode, "StateCode");
@@ -201,7 +201,7 @@ namespace IndianStateCensusAnalyserTest
         /// Test case for checking most populous state census state file.
         /// </summary>
         [Test]
-        public void CheckingMostPopulousState_WhenSorted_ShouldReturnsTheNumberOfStates()
+        public void GivenMostPopulousState_WhenSorted_ShouldReturnsTheNumberOfStates()
         {
             string expected = "199812341";
             string mostPopulation = JSONCensus.ReturnDataNumberOfStatesHighestSortCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "Population");
@@ -213,7 +213,7 @@ namespace IndianStateCensusAnalyserTest
         /// Test case for checking most population density per kilometer
         /// </summary>
         [Test]
-        public void CheckingMostPopulationDensityPerKm_WhenSorted_ShouldReturnsMostDensityPerSqKm()
+        public void GivenMostPopulationDensityPerKm_WhenSorted_ShouldReturnsMostDensityPerSqKm()
         {
             string expected = "1102";
             string mostDensityPerKm = JSONCensus.ReturnDataNumberOfStatesHighestSortCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "DensityPerSqKm");
@@ -225,7 +225,7 @@ namespace IndianStateCensusAnalyserTest
         /// Test case for checking least population density per kilometer
         /// </summary>
         [Test]
-        public void CheckingLeastPopulationDensityPerKm_WhenSorted_ShouldReturnsLeastDensityPerKm()
+        public void GivenLeastPopulationDensityPerKm_WhenSorted_ShouldReturnsLeastDensityPerKm()
         {
             string expected = "52";
             string leastDensityPerKm = JSONCensus.ReturnDataNumberOfStatesSortLowestCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "DensityPerSqKm");
@@ -237,7 +237,7 @@ namespace IndianStateCensusAnalyserTest
         /// Test for StateCensuscsv and json path to add into json after sorting return most AreaInSqKm.
         /// </summary>
         [Test]
-        public void CheckingLargestStateByArea_WhenSortedByAreaPerKm_ShouldReturnsLargestStateArea()
+        public void GivenLargestStateByArea_WhenSortedByAreaPerKm_ShouldReturnsLargestStateArea()
         {
             string expected = "342239";
             string largestStateArea = JSONCensus.ReturnDataNumberOfStatesHighestSortCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "AreaInSqKm");
@@ -249,7 +249,7 @@ namespace IndianStateCensusAnalyserTest
         /// Test for StateCensuscsv and json path to add into json after sorting return least AreaInSqKm.
         /// </summary>
         [Test]
-        public void CheckingSmallestStateByArea_WhenSortedByAreaPerKm_ShouldReturnsSmallestStateArea()
+        public void GivenSmallestStateByArea_WhenSortedByAreaPerKm_ShouldReturnsSmallestStateArea()
         {
             string expected = "3702";
             string smallestStateArea = JSONCensus.ReturnDataNumberOfStatesSortLowestCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "AreaInSqKm");
